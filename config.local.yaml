@@ -1,0 +1,51 @@
+# system configuration
+system:
+  env: public # Change to "develop" to skip authentication for development mode
+  addr: 8888
+  db-type: mysql
+  oss-type: local # 控制oss选择走本地还是 七牛等其他仓 自行增加其他oss仓可以在 server/utils/upload/upload.go 中 NewOss函数配置
+  use-redis: true # 使用redis false true
+  use-multipoint: false
+  # IP限制次数 一个小时15000次
+  iplimit-count: 15000
+  #  IP限制一个小时
+  iplimit-time: 3600
+  #  路由全局前缀
+  router-prefix: "/api"
+  snowflake-node: 1 # 雪花算法node 唯一ID
+
+# redis configuration
+redis:
+  db: 0
+  addr: 127.0.0.1:6379
+  password: ""
+
+# 日志配置
+zap:
+  level: info
+  format: console  # 输出格式 json 格式/console 终端
+  prefix: ""  #日志前缀 [oms-fiber]
+  director: log  # 存储目录
+  show-line: true  # 追踪caller  true 显示报错行
+  encode-level: CapitalColorLevelEncoder # 大小写及颜色 编码 CapitalColorLevelEncoder LowercaseLevelEncoder
+  stacktrace-key: stacktrace
+  log-in-console: true # true输出到终端，false 输出到文件和终端
+
+# jwt configuration
+jwt:
+  signing-key: mdfk
+  expires-time: 1d
+  buffer-time: 0 # 0直接过期,没有缓冲时间
+  issuer: qmPlus
+
+mysql:
+  path: "127.0.0.1"
+  port: "3306"
+  config: "charset=utf8mb4&parseTime=True&loc=Local"
+  db-name: "oms-fiber"
+  username: "root"
+  password: "boonray2022"
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: ""  # warn
+  log-zap: false

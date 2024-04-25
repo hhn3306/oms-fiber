@@ -1,8 +1,6 @@
 package initialize
 
 import (
-	"errors"
-	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"oms-fiber/global"
 	"oms-fiber/middleware"
@@ -12,20 +10,13 @@ import (
 func Routers() *fiber.App {
 	Router := fiber.New()
 	Router.Use(middleware.DefaultLogger())
-	InstallPlugin(Router)
-	systemRouter := router.AllGroupRouterApp
-	fmt.Println(systemRouter)
+	//InstallPlugin(Router)
+	systemRouter := router.AllGroupRouterApp.System
 
-	Router.Get("/", func(c *fiber.Ctx) error {
-		//return errors.New("mdfuck")
-		//zap.L().Error("mdfk")
-		global.Log.Info("grd")
-		return c.SendString("Hello, World!")
-	})
+	//PublicGroup := Router.Group(global.Config.System.RouterPrefix).Use(middleware.CustomJWTMiddleware())
+	PublicGroup := Router.Group(global.Config.System.RouterPrefix).Use(middleware.CustomJWTMiddleware())
 
-	Router.Get("/123", func(c *fiber.Ctx) error {
-		return errors.New("mdfuck")
-		//return c.SendString("Hello, World!")
-	})
+	systemRouter.InitBaseRouter(PublicGroup)
+
 	return Router
 }

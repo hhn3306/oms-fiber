@@ -24,7 +24,7 @@ func (z *_zap) GetEncoder() zapcore.Encoder {
 // GetEncoderConfig 获取zapcore.EncoderConfig
 func (z *_zap) GetEncoderConfig() zapcore.EncoderConfig {
 	return zapcore.EncoderConfig{
-		ConsoleSeparator: "  ", // 日志间隔符,为了美观俩空格
+		ConsoleSeparator: " ", // 日志间隔符,为了美观俩空格
 		MessageKey:       "message",
 		LevelKey:         "level",
 		TimeKey:          "time",
@@ -52,8 +52,8 @@ func (z *_zap) GetEncoderCore(l zapcore.Level, level zap.LevelEnablerFunc) zapco
 
 // CustomTimeEncoder 自定义日志输出时间格式
 func (z *_zap) CustomTimeEncoder(t time.Time, encoder zapcore.PrimitiveArrayEncoder) {
-	//encoder.AppendString(global.Config.Zap.Prefix + t.Format("2006/01/02 - 15:04:05.000"))
-	encoder.AppendString("[qtmd] " + t.Format("2006/01/02-15:04:05.000"))
+	encoder.AppendString(global.Config.Zap.Prefix + t.Format("2006/01/02 - 15:04:05.000"))
+	//encoder.AppendString(global.Config.Zap.Prefix + t.Format("2006-01-02T15:04:05.000"))
 }
 
 // GetZapCores 根据配置文件的Level获取 []zapcore.Core

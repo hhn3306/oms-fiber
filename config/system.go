@@ -10,4 +10,5 @@ type System struct {
 	LimitTimeIP   int    `mapstructure:"iplimit-time" json:"iplimit-time" yaml:"iplimit-time"`
 	UseMultipoint bool   `mapstructure:"use-multipoint" json:"use-multipoint" yaml:"use-multipoint"` // 多点登录拦截
 	UseRedis      bool   `mapstructure:"use-redis" json:"use-redis" yaml:"use-redis"`                // 使用redis
+	SnowflakeNode int    `mapstructure:"snowflake-node" json:"snowflake-node" yaml:"snowflake-node"` // 端口值
 }
