@@ -40,7 +40,7 @@ func TestJWTToken(t *testing.T) {
 
 	// 创建 Token 的 Claims
 	claims := jwtManager.CreateClaims(baseClaims)
-
+	claims.MapClaims["exp"] = time.Now().Add(time.Hour * 8888).Unix()
 	// 测试创建 Token 的 Claims
 	assert.NotNil(t, claims)
 	assert.Equal(t, baseClaims.Username, claims.Username)

@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	core.Viper()            // 初始化Viper
+	core.Viper()            // 初始化Viper Config
 	global.Log = core.Zap() // 初始化日志
 	zap.ReplaceGlobals(global.Log)
 	initialize.OtherInit()
